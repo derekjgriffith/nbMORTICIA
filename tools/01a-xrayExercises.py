@@ -21,7 +21,7 @@ def U_(units):
 get_ipython().magic(u'matplotlib inline')
 
 
-# In[ ]:
+# In[20]:
 
 # Build a spectral transmission curve
 spec_trans = xray.DataArray([ 0.0, 0.1, 0.3, 0.5, 0.7, 1.0, 1.0, 0.8, 0.0],                      
@@ -31,45 +31,47 @@ spec_trans = xray.DataArray([ 0.0, 0.1, 0.3, 0.5, 0.7, 1.0, 1.0, 0.8, 0.0],
 spatial_frequencies = xray.DataArray(np.linspace(0.0, 1000.0, 11), name='spf', attrs={'spf_units': 'cy/mm'})
 
 
-# In[ ]:
+# In[21]:
 
 # Coordinate axis names are used to plot the data
 spec_trans.plot()
 plt.grid()
 
 
-# In[ ]:
+# In[31]:
 
+# Get values of a coordinate axis by name
 spec_trans.coords['wvl']
 
 
-# In[ ]:
+# In[32]:
 
 spec_trans.dims
 
 
-# In[ ]:
+# In[24]:
 
 spec_trans.attrs['wvl_units']
 
 
-# In[ ]:
+# In[25]:
 
 # Create a new wavelength grid
 wvl = xray.DataArray(np.linspace(500., 1050, 51), name='wvl', attrs={'wvl_units': 'nm'})
 
 
-# In[ ]:
+# In[26]:
 
 wvl
 
 
-# In[ ]:
+# In[27]:
 
-spc = scipy.interpolate.interp1d(spec_trans.coords['wvl'].data, spec_trans.data, kind='slinear', bounds_error=False, fill_value=0.0)
+spc = scipy.interpolate.interp1d(spec_trans.coords['wvl'].data, spec_trans.data, kind='slinear', 
+                                 bounds_error=False, fill_value=0.0)
 
 
-# In[ ]:
+# In[28]:
 
 plt.plot(wvl.data, spc(wvl.data))
 plt.grid()
@@ -85,12 +87,13 @@ spec_trans.data
 wvl
 
 
-# In[ ]:
+# In[29]:
 
-x = scipy.interpolate.RegularGridInterpolator((spec_trans.coords['wvl'].data,), spec_trans.data, bounds_error=False, fill_value=0.0)
+x = scipy.interpolate.RegularGridInterpolator((spec_trans.coords['wvl'].data,), spec_trans.data, 
+                                              bounds_error=False, fill_value=0.0)
 
 
-# In[ ]:
+# In[30]:
 
 x(wvl.data)
 
@@ -179,37 +182,47 @@ y = x.to('W/m**2/sr/nm')
 x.magnitude
 
 
-# In[ ]:
+# In[15]:
 
-def check_convert_units(value_with_units, preferred_units):
-    """ Check the units of a quantity and convert to preferred units using Python `pint`
-
-    :param value_with_units: A list with a numeric value or numpy array in the first position and a string
-        providing units in the second position. The unit string must be recognisable by the Python `pint` package.
-    :param preferred_units: A string expressing the units to which `pint` should convert the scalar
-    :return: Value expressed in the preferred units
-    """
-
-    # Use pint to convert
-    value = Q_(np.asarray(value_with_units[0], dtype=np.float64), value_with_units[1])  # Will blow up if units not recognised
-    value = value.to(preferred_units)
-    return value.magnitude
+# Here we have a transmission DataArray for 2 lens systems, labelled A and B
+trans = xray.DataArray([[ 0.0, 0.1, 0.3, 0.5, 0.7, 1.0, 1.0, 0.8, 0.0],
+                             [ 0.0, 0.2, 0.5, 0.7, 0.72, 0.7, 0.7, 0.6, 0.5]],                      
+                   [('idn', ['A', 'B']),
+                    ('wvl', [550., 600, 650, 700, 750, 800, 850, 950, 1000])], 
+                   name='trn',
+                   attrs={'trn_units': '1', 'wvl_units': 'nm', 'extrap_val': 0.0})
 
 
-# In[ ]:
+# In[16]:
 
-from morticia.sensor import optics
-optics.check_convert_units([[20,30,40], 'mm'], 'um')
-
-
-# In[ ]:
-
-spec_trans
+# Trapzoidal integration of an xray DataArray along a named axis
+# However, this returns a regular numpy array integrated along the named axis
+np.trapz(trans, axis=trans.get_axis_num('wvl'))
 
 
-# In[ ]:
+# In[17]:
 
-check_convert_units([spec_trans['wvl'], spec_trans.attrs['wvl_units']], 'um')
+# Latter integration result is wrong because we failed to take into account the actual coordinates
+# in the wavelength axis, so here we do the integration again, using the wavelength values
+# as a further input
+np.trapz(trans, trans['wvl'], axis=trans.get_axis_num('wvl'))
+
+
+# In[18]:
+
+plt.plot(trans['wvl'], trans.loc['A'], trans['wvl'], trans.loc['B'])
+
+
+# In[33]:
+
+# Index into the data using loc
+trans.loc['A']
+
+
+# In[35]:
+
+# Attributes in the attrs dictionary turn up as top-level attributes
+trans.wvl_units
 
 
 # In[ ]:
@@ -224,28 +237,10 @@ spec_trans
 
 # In[ ]:
 
-def xD_check_convert_units(xD, axis_name, preferred_units):
-    """ Check and convert units for one or more axes of a xray.DataArray
-
-    :param xD: An xray.DataArray object having an axis called `axis_name` and a value in the `attrs` dictionary
-    :param preferred_units: A string providing the preferred units that can be passed to `pint`
-    :return: A xray.DataArray, inwhich the values in the named axis have been converted to the preferred units
-        The `axis_name_units` field is also updated.
-    """
-
-    # Create a pint.Quantity object using the data from the named array
-    Q_values = Q_(xD[axis_name].data, xD.attrs[axis_name + '_units'])
-    Q_values = Q_values.to(preferred_units)
-    xD[axis_name] = Q_values.magnitude
-    xD.attrs[axis_name + '_units'] = preferred_units
-
-
-# In[ ]:
-
 xD_check_convert_units(spec_trans, 'wvl', 'nm')
 
 
-# In[9]:
+# In[ ]:
 
 spec_trans = xray.DataArray([ 0.0, 0.1, 0.3, 0.5, 0.7, 1.0, 1.0, 0.8, 0.0],                      
                    [('wvl', [550., 600, 650, 700, 750, 800, 850, 950, 1000])], 
@@ -253,7 +248,7 @@ spec_trans = xray.DataArray([ 0.0, 0.1, 0.3, 0.5, 0.7, 1.0, 1.0, 0.8, 0.0],
                    attrs={'trn_units': '', 'wvl_units': 'nm', 'extrap_val': 0.0})
 
 
-# In[15]:
+# In[ ]:
 
 from morticia.sensor import optics
 # This notebook is used for development/testing of the Optics module, so auto reload the Optics module if it changes
@@ -262,27 +257,27 @@ get_ipython().magic(u'aimport morticia.sensor.optics')
 get_ipython().magic(u'autoreload 1')
 
 
-# In[36]:
+# In[ ]:
 
 x=optics.Lens(efl=[30, 'mm'], fno=1.0, trn=spec_trans)
 
 
-# In[17]:
+# In[ ]:
 
 x.trn.plot()
 
 
-# In[29]:
+# In[ ]:
 
 
 
 
-# In[30]:
+# In[ ]:
 
 import os
 
 
-# In[32]:
+# In[ ]:
 
 os.path.abspath(os.curdir)
 
