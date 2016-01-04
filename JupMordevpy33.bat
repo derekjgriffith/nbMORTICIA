@@ -11,8 +11,7 @@ REM The activate command is a batch file and must therefore be wrapped in a call
 call activate mordevpy33
 REM Get Jupyter pointing in the right direction
 jupyter kernelspec install-self --user
-REM Note that the --script option is now deprecated and this should be done in some other way
-jupyter notebook --script
+jupyter notebook
 
 
 

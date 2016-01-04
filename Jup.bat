@@ -5,7 +5,7 @@ REM Deactivate any applicable virtual environment
 REM deactivate is a batch script and must therefore be wrapped in a call command
 call deactivate
 jupyter kernelspec install-self --user
-jupyter notebook --script
+jupyter notebook
 
 
 
