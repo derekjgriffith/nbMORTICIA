@@ -1,4 +1,6 @@
 *.pyc
 *.lnk
 .ipynb_checkpoints/
+Playpen.*
+
 
