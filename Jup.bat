@@ -4,7 +4,7 @@ REM to use the notebooks in the root Anaconda environment (not in a conda virtua
 REM Deactivate any applicable virtual environment
 REM deactivate is a batch script and must therefore be wrapped in a call command
 call deactivate
-jupyter kernelspec install-self --user
+REM jupyter kernelspec install-self --user
 jupyter notebook
 
 

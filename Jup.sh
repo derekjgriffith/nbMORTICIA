@@ -4,7 +4,7 @@
 # (not in a conda virtual environment) 
 # Deactivate any applicable virtual environment
 deactivate
-jupyter kernelspec install-self --user
+# jupyter kernelspec install-self --user # deprecated ?
 jupyter notebook
 
 

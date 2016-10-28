@@ -9,8 +9,8 @@ REM        in the mordevpy27 environment.
 
 REM The activate command is a batch file and must therefore be wrapped in a call command 
 call activate mordevpy27
-REM Get Jupyter pointing in the right direction
-jupyter kernelspec install-self --user
+REM Get Jupyter pointing in the right direction - seems to be deprecated
+REM jupyter kernelspec install-self --user
 jupyter notebook
 
 

@@ -9,8 +9,8 @@
 #        in the mordevpy27 environment.
 
 activate mordevpy27
-# Get Jupyter pointing in the right direction
-jupyter kernelspec install-self --user
+# Get Jupyter pointing in the right direction  # deprecated ?
+# jupyter kernelspec install-self --user
 jupyter notebook
 
 
