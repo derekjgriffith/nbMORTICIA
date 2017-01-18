@@ -1,0 +1,232 @@
+<scene version="0.5.0">
+	<!-- This is a CUBI with the step down to the south, located at Pretoria in the Southern hemisphere winter -->
+
+	<integrator type="multichannel">
+		<!-- Set up a path integrator for full illumination, including diffuse inter-reflections -->
+		<!--<integrator type="path"/>-->
+		<!-- Include also calculation of one or more pixel field maps -->
+		<integrator type="field">
+			<string name="field" value="geoNormal"/>
+		</integrator>
+		
+		<integrator type="field">
+			<string name="field" value="distance"/>
+		</integrator>
+<!--		
+		<integrator type="field">
+			<string name="field" value="shapeIndex"/>
+		</integrator>
+		<integrator type="field">
+			<string name="field" value="primIndex"/>
+		</integrator>
+-->		
+		<integrator type="field">
+			<string name="field" value="uv"/>
+		</integrator>
+		
+	</integrator>	
+	<!-- Make a sunsky environment with the zenith at +z -->
+
+	<emitter type="sunsky">
+		<transform name="toWorld">
+			<rotate x="1" angle="90"/>
+		</transform>
+		<!-- Set up for Pretoria -->
+		<float name="latitude" value="-25.75665"/>
+		<float name="longitude" value="28.279648"/>
+		<float name="timezone" value="2"/>
+		<integer name="year" value="2016"/>
+		<integer name="month" value="6"/>
+		<integer name="day" value="13"/>
+		<float name="hour" value="15"/>
+		<float name="minute" value="0"/>
+		<float name="second" value="0"/>	
+	</emitter>
+	<!-- Create some diffuse BSDFs -->
+
+	<bsdf type="diffuse" id="diffuseWhite">
+		<spectrum name="reflectance" value="1, 1, 1"/>
+	</bsdf>
+	
+	<bsdf type="diffuse" id="diffuseRed">
+		<spectrum name="reflectance" value="1, 0, 0"/>
+	</bsdf>	
+	
+	<!-- Face South Upper -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate x="1" angle="90"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate z="0.25"/>
+		</transform>
+	</shape>
+
+	<!--  Face Zenith South -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate x="1" angle="0"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate y="-0.25"/>
+		</transform>
+	</shape>
+	
+	<!--  Face Zenith North -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate x="1" angle="0"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate y="0.25" z="0.5"/>
+		</transform>
+	</shape>	
+	
+	<!--  Face South Lower -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate x="1" angle="90"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate y="-0.5" z="-0.25"/>
+		</transform>
+	</shape>
+
+	<!--  Face West South Lower -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate y="1" angle="-90"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate x="-0.25" y="-.25" z="-.25"/>
+		</transform>
+	</shape>
+
+	<!--  Face Nadir South -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate x="1" angle="180"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate y="-.25" z="-0.5"/>
+		</transform>
+	</shape>
+	
+	<!--  Face Nadir North -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate x="1" angle="180"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate y="0.25" z="-0.5"/>
+		</transform>
+	</shape>	
+
+	<!--  Face West North Lower -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate y="1" angle="-90"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate x="-0.25" y="0.25" z="-0.25"/>
+		</transform>
+	</shape>
+
+
+	<!--  Face West North Upper -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate y="1" angle="-90"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate x="-0.25" y="0.25" z="0.25"/>
+		</transform>
+	</shape>
+
+	<!--  Face North Upper -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate x="1" angle="-90"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate x="0.0" y="0.5" z="0.25"/>
+		</transform>
+	</shape>
+
+	<!--  Face North Lower -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate x="1" angle="-90"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate x="0.0" y="0.5" z="-0.25"/>
+		</transform>
+	</shape>
+
+	<!--  Face East North Lower -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate y="1" angle="90"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate x="0.25" y="0.25" z="-0.25"/>
+		</transform>
+	</shape>
+
+
+	<!--  Face East North Upper -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate y="1" angle="90"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate x="0.25" y="0.25" z="0.25"/>
+		</transform>
+	</shape>
+
+	<!--  Face East South Lower -->
+	<shape type="rectangle">
+		<ref id="diffuseWhite"/>
+		<transform name="toWorld">
+			<rotate y="1" angle="90"/>
+			<scale x="0.25" y="0.25" z="0.25"/>
+			<translate x="0.25" y="-.25" z="-.25"/>
+		</transform>
+	</shape>
+
+	<!-- Build the sensor -->
+	<sensor type="perspective">
+		<float name="focusDistance" value="3.3"/>
+		<float name="apertureRadius" value="0.05"/>
+		<float name="fov" value="40"/>
+		<string name="fovAxis" value="x"/>
+		<transform name="toWorld">
+			<lookat target="1.46045, -1.46045, 0.730224" origin="2.12711, -2.12711, 1.06356" up="-0.235702, 0.235702, 0.942809"/>
+		</transform>
+		<sampler type="independent">
+			<integer name="sampleCount" value="1"/>
+		</sampler>
+		<film type="hdrfilm">
+			<rfilter type="gaussian"/>
+			<integer name="height" value="768"/>
+			<integer name="width" value="1024"/>
+			<string name="fileFormat" value="openexr"/>
+			<string name="pixelFormat" value="rgb, luminance, rgb"/>
+			<string name="channelNames" value="normal, distance, uv"/>
+			<string name="componentFormat" value="float32"/>
+		</film>
+	</sensor>
+    <!-- Irradiance meter	
+	<shape type="rectangle">
+		<sensor type="irradiancemeter">
+			<film type="mfilm">
+				<string name="componentFormat" value="float32"/>
+				<string name="fileFormat" value="numpy"/>
+			</film>
+			<sampler type="independent">
+				<integer name="sampleCount" value="1024"/>
+			</sampler>			
+		</sensor>
+	</shape>
+	-->
+</scene>
