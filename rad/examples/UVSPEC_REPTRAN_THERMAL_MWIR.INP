@@ -1,0 +1,5 @@
+rte_solver disort       # Radiative transfer equation solver
+mol_abs_param reptran coarse
+source thermal             # Thermal computation
+wavelength 2000 5600   # Reptran allows for 120nm to 5000nm
+quiet

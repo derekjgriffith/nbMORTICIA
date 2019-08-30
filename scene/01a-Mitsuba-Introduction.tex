@@ -1,0 +1,1518 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt, a4paper, landscape]{scrartcl}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font than Computer Modern for most use cases
+    \usepackage{palatino}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Mitsuba Python API}\subtitle{Examples and Exercises}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Python API for Mitsuba}\label{python-api-for-mitsuba}
+
+The \href{http://www.mitsuba-renderer.org/}{Mitsuba} rendering system
+exposes many of the C++ API calls to Python access. This notebook
+includes the examples from the Mitsuba documentation as well as some
+additional examples for composing and rendering a scene from Python.
+
+Documentation for the
+\href{http://www.mitsuba-renderer.org/api/group__libpython.html}{Mitsuba
+Python bindings} is available at the Mitsuba website.
+
+Note that this notebook runs on the assumption that there is a local
+installation of Mitsuba and that it is compiled in the normal RGB
+(SPECTRUM\_SAMPLES = 3) mode. Full integration with \emph{MORTICIA}
+requires that Mitsuba be compiled with 4 or more spectral channels in
+order to put Mitusba into the absolute radiometric mode. ``Field''
+integrators are not available when Mitsuba is compiled with
+SPECTRUM\_SAMPLES \textgreater{} 3. The field integrators are
+illustrated in this notebook, including distance, normals, UV-mapping
+coordinates are more. These integrators can be accessed using the
+Mitsuba ``multichannel'' integrator facility.
+
+The recommended approach is that the local copy of Mitsuba be compiled
+with SPECTRUM\_SAMPLES = 3 for the use of field integrators and that
+additional compute platforms be available with Mitsuba compiled having
+SPECTRUM\_SAMPLES \textgreater{} 3.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{os}\PY{o}{,} \PY{n+nn}{sys}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib} \PY{k+kn}{as} \PY{n+nn}{mpl}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.image} \PY{k+kn}{as} \PY{n+nn}{mpimg}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{c+c1}{\PYZsh{} Note that the MORTICIA scene module for Mitsuba is imported as mormit,}
+        \PY{c+c1}{\PYZsh{} whereas the Mitsuba Python API is imported as mitsuba}
+        \PY{k+kn}{import} \PY{n+nn}{morticia.rad.radute} \PY{k+kn}{as} \PY{n+nn}{radute}
+        \PY{k+kn}{import} \PY{n+nn}{morticia.scene.mitsuba} \PY{k+kn}{as} \PY{n+nn}{mormit}
+        \PY{n}{font} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{family}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}   \PY{p}{:} \PY{l+m+mi}{22}\PY{p}{\PYZcb{}}
+        \PY{n}{mpl}\PY{o}{.}\PY{n}{rc}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{font}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Use the following magic to configure the backend for }
+        \PY{c+c1}{\PYZsh{} PDF graphic generation if exporting for publication}
+        \PY{n}{backend\PYZus{}figure\PYZus{}format} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pdf}\PY{l+s+s1}{\PYZsq{}}
+        \PY{k}{if} \PY{n}{backend\PYZus{}figure\PYZus{}format}\PY{p}{:}
+            \PY{o}{\PYZpc{}}\PY{k}{config} InlineBackend.figure\PYZus{}format = \PYZsq{}\PYZdl{}backend\PYZus{}figure\PYZus{}format\PYZsq{}
+        \PY{c+c1}{\PYZsh{} Now import the mitsuba Python extension}
+        \PY{c+c1}{\PYZsh{} The following applies only to Windows}
+        \PY{c+c1}{\PYZsh{} NOTE: remember to specify paths using FORWARD slashes (i.e. \PYZsq{}/\PYZsq{} instead of}
+        \PY{c+c1}{\PYZsh{} \PYZsq{}\PYZbs{}\PYZsq{} to avoid pitfalls with string escaping)}
+        \PY{c+c1}{\PYZsh{} Configure the search path for the Python extension module}
+        \PY{n}{my\PYZus{}path\PYZus{}to\PYZus{}mitsuba} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C:/Users/DGriffith/Downloads/Mitsuba/Mitsuba 0.5.0}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{my\PYZus{}path\PYZus{}to\PYZus{}mitsuba} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/python/2.7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Ensure that Python will be able to find the Mitsuba core libraries}
+        \PY{n}{os}\PY{o}{.}\PY{n}{environ}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PATH}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{my\PYZus{}path\PYZus{}to\PYZus{}mitsuba} \PY{o}{+} \PY{n}{os}\PY{o}{.}\PY{n}{pathsep} \PY{o}{+} \PY{n}{os}\PY{o}{.}\PY{n}{environ}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PATH}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} On other platforms, measures may also be required to ensure that Python can find the Mitsuba package}
+        \PY{k+kn}{import} \PY{n+nn}{mitsuba}
+        \PY{c+c1}{\PYZsh{} Use auto reload of librad for development purposes}
+        \PY{o}{\PYZpc{}}\PY{k}{load\PYZus{}ext} autoreload
+        \PY{o}{\PYZpc{}}\PY{k}{autoreload} 1
+        \PY{o}{\PYZpc{}}\PY{k}{aimport} morticia.scene.mitsuba
+        \PY{o}{\PYZpc{}}\PY{k}{aimport} 
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{n}{casetitle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mitsuba Python API}\PY{l+s+s1}{\PYZsq{}} 
+        \PY{n}{subtitle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Examples and Exercises}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Modules to reload:
+morticia.scene.mitsuba
+
+Modules to skip:
+
+
+    \end{Verbatim}
+
+    \subsection{Accessing Core Funcions}\label{accessing-core-funcions}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} A simple 3\PYZhy{}vector transformation operation}
+        \PY{k+kn}{from} \PY{n+nn}{mitsuba.core} \PY{k+kn}{import} \PY{o}{*}
+        \PY{c+c1}{\PYZsh{} Create a normalized direction vector}
+        \PY{n}{myVector} \PY{o}{=} \PY{n}{normalize}\PY{p}{(}\PY{n}{mitsuba}\PY{o}{.}\PY{n}{core}\PY{o}{.}\PY{n}{Vector}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{,} \PY{l+m+mf}{3.0}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} 90 deg. rotation around the Y axis}
+        \PY{n}{trafo} \PY{o}{=} \PY{n}{Transform}\PY{o}{.}\PY{n}{rotate}\PY{p}{(}\PY{n}{mitsuba}\PY{o}{.}\PY{n}{core}\PY{o}{.}\PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{90}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Apply the rotation and display the result}
+        \PY{k}{print}\PY{p}{(}\PY{n}{trafo} \PY{o}{*} \PY{n}{myVector}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.801784, 0.534522, -0.267261]
+
+    \end{Verbatim}
+
+    \subsection{Loading a Scene}\label{loading-a-scene}
+
+Scenes are loaded using the file resolver to find the .xml scene file
+and then the
+\href{http://www.mitsuba-renderer.org/api/classmitsuba_1_1_scene_handler.html}{SceneHandler}
+to load the scene.
+
+Here, the scene cubi.xml contains a CUBI object used in thermal
+signatorics. The CUBI is also used as a standard object for field
+validation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{from} \PY{n+nn}{mitsuba.render} \PY{k+kn}{import} \PY{n}{SceneHandler}
+        \PY{c+c1}{\PYZsh{} Get a reference to the thread\PYZsq{}s file resolver}
+        \PY{n}{fileResolver} \PY{o}{=} \PY{n}{Thread}\PY{o}{.}\PY{n}{getThread}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{getFileResolver}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Register any searchs path needed to load scene resources (optional)}
+        \PY{n}{fileResolver}\PY{o}{.}\PY{n}{appendPath}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./MitsubaScenes/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Optional: supply parameters that can be accessed}
+        \PY{c+c1}{\PYZsh{} by the scene (e.g. as \PYZdl{}myParameter)}
+        \PY{n}{paramMap} \PY{o}{=} \PY{n}{StringMap}\PY{p}{(}\PY{p}{)}
+        \PY{n}{paramMap}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{myParameter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{value}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Load the scene from an XML file}
+        \PY{n}{scene} \PY{o}{=} \PY{n}{SceneHandler}\PY{o}{.}\PY{n}{loadScene}\PY{p}{(}\PY{n}{fileResolver}\PY{o}{.}\PY{n}{resolve}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./MitsubaScenes/cubi.xml}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{paramMap}\PY{p}{)}
+        \PY{n}{scene}\PY{o}{.}\PY{n}{setDestinationFile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./MitsubaScenes/cubiEXR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Set the name of the render output file}
+        \PY{c+c1}{\PYZsh{} Display a textual summary of the scene\PYZsq{}s contents}
+        \PY{k}{print}\PY{p}{(}\PY{n}{scene}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Scene[
+  sensor = ref<PerspectiveCameraImpl>[ref=2, ptr=PerspectiveCamera[
+    xfov = 40,
+    nearClip = 0.01,
+    farClip = 10000,
+    worldTransform = ref<AnimatedTransform>[ref=1, ptr=Matrix4x4[
+      -0.707107, -0.235706, -0.666665, 2.12711;
+      -0.707107, 0.235706, 0.666665, -2.12711;
+      0, 0.942807, -0.333339, 1.06356;
+      0, 0, 0, 1
+    ]],
+    sampler = IndependentSampler[
+      sampleCount = 1
+    ],
+    film = HDRFilm[
+      size = [1024, 768],
+      fileFormat = 1,
+      pixelFormat = rgb, luminance, rgb, 
+      channelNames = "normal.R", "normal.G", "normal.B", "distance.Y", "uv.R", "uv.G", "uv.B", 
+      componentFormat = float32,
+      cropOffset = [0, 0],
+      cropSize = [1024, 768],
+      banner = 1,
+      filter = GaussianFilter[stddev=0.500000, radius=2.000000]
+    ],
+    medium = ref<Medium>[null],
+    shutterOpen = 0,
+    shutterOpenTime = 0
+  ]],
+  sampler = ref<IndependentSampler>[ref=2, ptr=IndependentSampler[
+    sampleCount = 1
+  ]],
+  integrator = ref<MultiChannelIntegrator>[ref=1, ptr=MultiChannelIntegrator[
+    integrators = \{
+      FieldIntegrator[],
+      FieldIntegrator[],
+      FieldIntegrator[],
+    \}
+  ]],
+  kdtree = ref<ShapeKDTree>[ref=1, ptr=ShapeKDTree[unknown]],
+  environmentEmitter = ref<EnvironmentMap>[ref=2, ptr=EnvironmentMap[
+    filename = "",
+    samplingWeight = 1,
+    bsphere = BSphere[center = [0, 0, 0], radius = 0],
+    worldTransform = ref<AnimatedTransform>[ref=2, ptr=Matrix4x4[
+      1, 0, 0, 0;
+      0, -4.37114e-008, -1, 0;
+      0, 1, -4.37114e-008, 0;
+      0, 0, 0, 1
+    ]],
+    mipmap = TMIPMap[
+       pixelFormat = rgb,
+       size = 1.0 MiB,
+       levels = 10,
+       cached = no,
+       filterType = ewa,
+       bc = [repeat, clamp],
+       minimum = [0, 0, 0],
+       maximum = [4591.88, 3524.41, 2460.93],
+       average = [0.0837834, 0.0815985, 0.082528]
+    ],
+    medium = ref<Medium>[null]
+  ]],
+  shapes = \{
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        0.25, 0, 0, 0;
+        0, -1.09278e-008, -0.25, 0;
+        0, 0.25, -1.09278e-008, 0.25;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        0.25, 0, 0, 0;
+        0, 0.25, 0, -0.25;
+        0, 0, 0.25, 0;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        0.25, 0, 0, 0;
+        0, 0.25, 0, 0.25;
+        0, 0, 0.25, 0.5;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        0.25, 0, 0, 0;
+        0, -1.09278e-008, -0.25, -0.5;
+        0, 0.25, -1.09278e-008, -0.25;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        -1.09278e-008, 0, -0.25, -0.25;
+        0, 0.25, 0, -0.25;
+        0.25, 0, -1.09278e-008, -0.25;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        0.25, 0, 0, 0;
+        0, -0.25, 2.18557e-008, -0.25;
+        0, -2.18557e-008, -0.25, -0.5;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        0.25, 0, 0, 0;
+        0, -0.25, 2.18557e-008, 0.25;
+        0, -2.18557e-008, -0.25, -0.5;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        -1.09278e-008, 0, -0.25, -0.25;
+        0, 0.25, 0, 0.25;
+        0.25, 0, -1.09278e-008, -0.25;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        -1.09278e-008, 0, -0.25, -0.25;
+        0, 0.25, 0, 0.25;
+        0.25, 0, -1.09278e-008, 0.25;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        0.25, 0, 0, 0;
+        0, -1.09278e-008, 0.25, 0.5;
+        0, -0.25, -1.09278e-008, 0.25;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        0.25, 0, 0, 0;
+        0, -1.09278e-008, 0.25, 0.5;
+        0, -0.25, -1.09278e-008, -0.25;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        -1.09278e-008, 0, 0.25, 0.25;
+        0, 0.25, 0, 0.25;
+        -0.25, 0, -1.09278e-008, -0.25;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        -1.09278e-008, 0, 0.25, 0.25;
+        0, 0.25, 0, 0.25;
+        -0.25, 0, -1.09278e-008, 0.25;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ],
+    Rectangle[
+      objectToWorld = Matrix4x4[
+        -1.09278e-008, 0, 0.25, 0.25;
+        0, 0.25, 0, -0.25;
+        -0.25, 0, -1.09278e-008, -0.25;
+        0, 0, 0, 1
+      ],
+      bsdf = ref<SmoothDiffuse>[ref=15, ptr=SmoothDiffuse[
+        id = "diffuseWhite",
+        reflectance = [1, 1, 1]
+      ]],
+      emitter = ref<Emitter>[null],
+      sensor = ref<Sensor>[null],
+      subsurface = ref<Subsurface>[null]
+    ]
+  \},
+  emitters = \{
+    EnvironmentMap[
+      filename = "",
+      samplingWeight = 1,
+      bsphere = BSphere[center = [0, 0, 0], radius = 0],
+      worldTransform = ref<AnimatedTransform>[ref=2, ptr=Matrix4x4[
+        1, 0, 0, 0;
+        0, -4.37114e-008, -1, 0;
+        0, 1, -4.37114e-008, 0;
+        0, 0, 0, 1
+      ]],
+      mipmap = TMIPMap[
+         pixelFormat = rgb,
+         size = 1.0 MiB,
+         levels = 10,
+         cached = no,
+         filterType = ewa,
+         bc = [repeat, clamp],
+         minimum = [0, 0, 0],
+         maximum = [4591.88, 3524.41, 2460.93],
+         average = [0.0837834, 0.0815985, 0.082528]
+      ],
+      medium = ref<Medium>[null]
+    ]
+  \},
+  media = \{
+  \},
+  sensors = \{
+    PerspectiveCamera[
+      xfov = 40,
+      nearClip = 0.01,
+      farClip = 10000,
+      worldTransform = ref<AnimatedTransform>[ref=1, ptr=Matrix4x4[
+        -0.707107, -0.235706, -0.666665, 2.12711;
+        -0.707107, 0.235706, 0.666665, -2.12711;
+        0, 0.942807, -0.333339, 1.06356;
+        0, 0, 0, 1
+      ]],
+      sampler = IndependentSampler[
+        sampleCount = 1
+      ],
+      film = HDRFilm[
+        size = [1024, 768],
+        fileFormat = 1,
+        pixelFormat = rgb, luminance, rgb, 
+        channelNames = "normal.R", "normal.G", "normal.B", "distance.Y", "uv.R", "uv.G", "uv.B", 
+        componentFormat = float32,
+        cropOffset = [0, 0],
+        cropSize = [1024, 768],
+        banner = 1,
+        filter = GaussianFilter[stddev=0.500000, radius=2.000000]
+      ],
+      medium = ref<Medium>[null],
+      shutterOpen = 0,
+      shutterOpenTime = 0
+    ]
+  \},
+  ssIntegrators = \{
+  \},
+  objects = \{
+    SmoothDiffuse[
+      id = "diffuseWhite",
+      reflectance = [1, 1, 1]
+    ],
+    SmoothDiffuse[
+      id = "diffuseRed",
+      reflectance = [1, 0, 0]
+    ]
+  \}
+]
+
+    \end{Verbatim}
+
+    \subsection{Rendering a Scene}\label{rendering-a-scene}
+
+First the scheduler and workers are set up and then the render job is
+submitted to a job queue. The queue should be set up only once per host.
+Either execute the next cell for execution on the local host, or the
+following cell for remote execution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Run this cell only once per session}
+        \PY{k+kn}{from} \PY{n+nn}{mitsuba.render} \PY{k+kn}{import} \PY{n}{RenderQueue}\PY{p}{,} \PY{n}{RenderJob}
+        \PY{k+kn}{import} \PY{n+nn}{multiprocessing}
+        \PY{n}{scheduler} \PY{o}{=} \PY{n}{Scheduler}\PY{o}{.}\PY{n}{getInstance}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Start up the scheduling system with one worker per local core}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{multiprocessing}\PY{o}{.}\PY{n}{cpu\PYZus{}count}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{scheduler}\PY{o}{.}\PY{n}{registerWorker}\PY{p}{(}\PY{n}{LocalWorker}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wrk}\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{i}\PY{p}{)}\PY{p}{)}
+        \PY{n}{scheduler}\PY{o}{.}\PY{n}{start}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    The next cell shows how to render via a remote instance of
+\emph{mtssrv}. Thas can be tested on the local host by specifying the -i
+127.0.0.1 option with \emph{mtssrv}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Alternatively set up remote workers}
+        \PY{c+c1}{\PYZsh{} Run this cell only once per session}
+        
+        \PY{c+c1}{\PYZsh{} Connect to a socket on a named host or IP address}
+        \PY{c+c1}{\PYZsh{} 7554 is the default port of \PYZsq{}mtssrv\PYZsq{}}
+        \PY{c+c1}{\PYZsh{} The IP number 127.0.0.1 usually refers to the local host, but run mtssrv \PYZhy{}i 127.0.0.1}
+        \PY{n}{stream} \PY{o}{=} \PY{n}{SocketStream}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{146.64.248.22}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{7554}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Create a remote worker instance that communicates over the stream}
+        \PY{n}{remoteWorker} \PY{o}{=} \PY{n}{RemoteWorker}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{netWorker}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{stream}\PY{p}{)}
+        \PY{n}{scheduler} \PY{o}{=} \PY{n}{Scheduler}\PY{o}{.}\PY{n}{getInstance}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Register the remote worker (and any other potential workers)}
+        \PY{n}{scheduler}\PY{o}{.}\PY{n}{registerWorker}\PY{p}{(}\PY{n}{remoteWorker}\PY{p}{)}
+        \PY{n}{scheduler}\PY{o}{.}\PY{n}{start}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{from} \PY{n+nn}{mitsuba.render} \PY{k+kn}{import} \PY{n}{RenderQueue}\PY{p}{,} \PY{n}{RenderJob}
+        \PY{c+c1}{\PYZsh{} Create a queue for tracking render jobs}
+        \PY{n}{queue} \PY{o}{=} \PY{n}{RenderQueue}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Create a render job and insert it into the queue}
+        \PY{n}{job} \PY{o}{=} \PY{n}{RenderJob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{myRenderJob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{scene}\PY{p}{,} \PY{n}{queue}\PY{p}{)}
+        \PY{n}{job}\PY{o}{.}\PY{n}{start}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Wait for all jobs to finish and release resources}
+        \PY{n}{queue}\PY{o}{.}\PY{n}{waitLeft}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{queue}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Print some statistics about the rendering process}
+        \PY{k}{print}\PY{p}{(}\PY{n}{Statistics}\PY{o}{.}\PY{n}{getInstance}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{getStats}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+------------------------------------------------------------
+ * Loaded plugins :
+    -  plugins\textbackslash{}diffuse.dll [Smooth diffuse BRDF]
+    -  plugins\textbackslash{}envmap.dll [Environment map]
+    -  plugins\textbackslash{}field.dll [Field extraction integrator]
+    -  plugins\textbackslash{}gaussian.dll [Gaussian reconstruction filter]
+    -  plugins\textbackslash{}hdrfilm.dll [High dynamic range film]
+    -  plugins\textbackslash{}independent.dll [Independent sampler]
+    -  plugins\textbackslash{}lanczos.dll [Lanczos Sinc filter]
+    -  plugins\textbackslash{}multichannel.dll [Multi-channel integrator]
+    -  plugins\textbackslash{}perspective.dll [Perspective camera]
+    -  plugins\textbackslash{}rectangle.dll [Rectangle intersection primitive]
+    -  plugins\textbackslash{}sky.dll [Skylight emitter]
+    -  plugins\textbackslash{}sphere.dll [Sphere intersection primitive]
+    -  plugins\textbackslash{}sunsky.dll [Sun \& sky emitter]
+
+  * General :
+    -  Normal rays traced : 786.432 K
+
+  * Texture system :
+    -  Cumulative MIP map memory allocations : 1 MiB
+------------------------------------------------------------
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Read the data resulting from the Mitsuba run}
+         \PY{n}{channel\PYZus{}names}\PY{p}{,} \PY{n}{im\PYZus{}dict}\PY{p}{,} \PY{n}{header} \PY{o}{=} \PY{n}{radute}\PY{o}{.}\PY{n}{readOpenEXR}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./MitsubaScenes/cubiEXR.exr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Print keys of what came back in the image dictionary}
+         \PY{k}{print} \PY{n}{im\PYZus{}dict}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['normal', 'normal.G', 'uv.R', 'uv', 'distance.Y', 'normal.B', 'uv.B', 'uv.G', 'normal.R']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Plot the distance data}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{10.24}\PY{p}{,} \PY{l+m+mf}{7.68}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{distance.Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} <matplotlib.image.AxesImage at 0xdae6160>
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Anaconda\textbackslash{}envs\textbackslash{}mordevpy27\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}font\_manager.py:1288: UserWarning: findfont: Font family [u'normal'] not found. Falling back to Bitstream Vera Sans
+  (prop.get\_family(), self.defaultFamily[fontext]))
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{01a-Mitsuba-Introduction_files/01a-Mitsuba-Introduction_15_2.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Plot the UV data (u, v coordinates on each pixel hit)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{10.24}\PY{p}{,} \PY{l+m+mf}{7.68}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{uv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} <matplotlib.image.AxesImage at 0xdf7dda0>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{01a-Mitsuba-Introduction_files/01a-Mitsuba-Introduction_16_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Plot the UV data (u, v coordinates on each pixel hit)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{10.24}\PY{p}{,} \PY{l+m+mf}{7.68}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} <matplotlib.image.AxesImage at 0xe2ac198>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{01a-Mitsuba-Introduction_files/01a-Mitsuba-Introduction_17_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Load the scene from an XML file for the low dynamic range version}
+         \PY{c+c1}{\PYZsh{} Supply parameters that can be accessed}
+         \PY{c+c1}{\PYZsh{} by the scene (e.g. as \PYZdl{}myParameter)}
+         \PY{n}{paramMap} \PY{o}{=} \PY{n}{StringMap}\PY{p}{(}\PY{p}{)}
+         \PY{n}{paramMap}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{surfaceAlbedo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0.5 0.5 0.5}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{paramMap}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CUBIfaceReflectance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1.0 1.0 1.0}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{scenePNG} \PY{o}{=} \PY{n}{SceneHandler}\PY{o}{.}\PY{n}{loadScene}\PY{p}{(}\PY{n}{fileResolver}\PY{o}{.}\PY{n}{resolve}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./MitsubaScenes/cubiPNG.xml}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{paramMap}\PY{p}{)}
+         \PY{n}{scenePNG}\PY{o}{.}\PY{n}{setDestinationFile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./MitsubaScenes/cubiPNG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Set the name of the render output file}
+         \PY{c+c1}{\PYZsh{} Create a render job and insert it into the queue}
+         \PY{n}{job} \PY{o}{=} \PY{n}{RenderJob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{myRenderJob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{scenePNG}\PY{p}{,} \PY{n}{queue}\PY{p}{)}
+         \PY{n}{job}\PY{o}{.}\PY{n}{start}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Wait for all jobs to finish and release resources}
+         \PY{n}{queue}\PY{o}{.}\PY{n}{waitLeft}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{queue}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Take a look at the CUBI}
+         \PY{n}{cubi\PYZus{}img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./MitsubaScenes/cubiPNG.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{10.24}\PY{p}{,} \PY{l+m+mf}{7.68}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{cubi\PYZus{}img}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} <matplotlib.image.AxesImage at 0xe37d7b8>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{01a-Mitsuba-Introduction_files/01a-Mitsuba-Introduction_18_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Load the material preview scene from an XML file}
+         \PY{n}{mat\PYZus{}scene} \PY{o}{=} \PY{n}{SceneHandler}\PY{o}{.}\PY{n}{loadScene}\PY{p}{(}\PY{n}{fileResolver}\PY{o}{.}\PY{n}{resolve}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./MitsubaScenes/matpreview.xml}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{mat\PYZus{}scene}\PY{o}{.}\PY{n}{setDestinationFile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./MitsubaScenes/mat\PYZus{}ball}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Set the name of the render output file}
+         \PY{c+c1}{\PYZsh{} Display a textual summary of the scene\PYZsq{}s contents}
+         \PY{k}{print}\PY{p}{(}\PY{n}{mat\PYZus{}scene}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Scene[
+  sensor = ref<PerspectiveCameraImpl>[ref=2, ptr=PerspectiveCamera[
+    xfov = 37.8664,
+    nearClip = 0.01,
+    farClip = 10000,
+    worldTransform = ref<AnimatedTransform>[ref=1, ptr=Matrix4x4[
+      -0.685884, -0.317366, -0.654861, 3.69558;
+      -0.727631, 0.312466, 0.610671, -3.46243;
+      0.0108156, 0.895346, -0.44524, 3.25463;
+      0, 0, 0, 1
+    ]],
+    sampler = LowDiscrepancySampler[
+      sampleCount = 64,
+      dimension = 4
+    ],
+    film = LDRFilm[
+      size = [683, 512],
+      fileFormat = 0,
+      pixelFormat = rgb,
+      gamma = -1,
+      cropOffset = [0, 0],
+      cropSize = [683, 512],
+      banner = 0,
+      method = gamma,
+      exposure = 0,
+      reinhardKey = 0.18,
+      reinhardBurn = 0,
+      filter = GaussianFilter[stddev=0.500000, radius=2.000000]
+    ],
+    medium = ref<Medium>[null],
+    shutterOpen = 0,
+    shutterOpenTime = 0
+  ]],
+  sampler = ref<LowDiscrepancySampler>[ref=2, ptr=LowDiscrepancySampler[
+    sampleCount = 64,
+    dimension = 4
+  ]],
+  integrator = ref<MIPathTracer>[ref=1, ptr=MIPathTracer[
+    maxDepth = -1,
+    rrDepth = 5,
+    strictNormals = 0
+  ]],
+  kdtree = ref<ShapeKDTree>[ref=1, ptr=ShapeKDTree[unknown]],
+  environmentEmitter = ref<EnvironmentMap>[ref=2, ptr=EnvironmentMap[
+    filename = "./MitsubaScenes/envmap.exr",
+    samplingWeight = 1,
+    bsphere = BSphere[center = [0, 0, 0], radius = 0],
+    worldTransform = ref<AnimatedTransform>[ref=1, ptr=Matrix4x4[
+      0.224951, -1e-006, 0.97437, 0;
+      0.97437, 0, -0.224951, 0;
+      8.74228e-014, 1, 1e-006, 8.87;
+      0, 0, 0, 1
+    ]],
+    mipmap = TMIPMap[
+       pixelFormat = rgb,
+       size = 1.0 MiB,
+       levels = 10,
+       cached = no,
+       filterType = ewa,
+       bc = [repeat, clamp],
+       minimum = [8.19564e-005, 0.000175357, 4.86374e-005],
+       maximum = [19.2813, 10.7656, 8.82031],
+       average = [0.39696, 0.316207, 0.278359]
+    ],
+    medium = ref<Medium>[null]
+  ]],
+  shapes = \{
+    SerializedMesh[
+      name = "matpreview@2",
+      triangleCount = 57152,
+      vertexCount = 29439,
+      faceNormals = false,
+      hasNormals = true,
+      hasTexcoords = true,
+      hasTangents = false,
+      hasColors = false,
+      surfaceArea = -1,
+      aabb = AABB3[min=[-1.05939, -1.08033, 0.01403], max=[1.08033, 1.05939, 1.91551]],
+      bsdf = ref<SmoothPlastic>[ref=1, ptr=SmoothPlastic[
+        id = "unnamed",
+        specularReflectance = [1, 1, 1],
+        diffuseReflectance = [0.00913406, 0.0595112, 0.107023],
+        specularSamplingWeight = 0.950366,
+        diffuseSamplingWeight = 0.0496341,
+        nonlinear = 0,
+        eta = 1.89947,
+        fdrInt = 0.763693,
+        fdrExt = 0.147406
+      ]],
+      subsurface = ref<Subsurface>[null],
+      emitter = ref<Emitter>[null]
+    ],
+    SerializedMesh[
+      name = "Interior-mesh\_0",
+      triangleCount = 3936,
+      vertexCount = 2078,
+      faceNormals = false,
+      hasNormals = true,
+      hasTexcoords = true,
+      hasTangents = false,
+      hasColors = false,
+      surfaceArea = -1,
+      aabb = AABB3[min=[-0.927272, -0.927272, -0.0058961], max=[0.927272, 0.927272, 1.71208]],
+      bsdf = ref<SmoothDiffuse>[ref=2, ptr=SmoothDiffuse[
+        id = "\_\_diffmat",
+        reflectance = [0.18, 0.18, 0.18]
+      ]],
+      subsurface = ref<Subsurface>[null],
+      emitter = ref<Emitter>[null]
+    ],
+    SerializedMesh[
+      name = "Plane-mesh\_0",
+      triangleCount = 512,
+      vertexCount = 289,
+      faceNormals = false,
+      hasNormals = true,
+      hasTexcoords = true,
+      hasTangents = false,
+      hasColors = false,
+      surfaceArea = -1,
+      aabb = AABB3[min=[-7.19786, -5.46007, -0.0120714], max=[5.14732, 7.94973, 6.84708]],
+      bsdf = ref<SmoothDiffuse>[ref=2, ptr=SmoothDiffuse[
+        id = "\_\_planemat",
+        reflectance = Checkerboard[
+            color1 = [0.2, 0.2, 0.2],
+            color0 = [0.4, 0.4, 0.4]
+        ]
+      ]],
+      subsurface = ref<Subsurface>[null],
+      emitter = ref<Emitter>[null]
+    ]
+  \},
+  emitters = \{
+    EnvironmentMap[
+      filename = "./MitsubaScenes/envmap.exr",
+      samplingWeight = 1,
+      bsphere = BSphere[center = [0, 0, 0], radius = 0],
+      worldTransform = ref<AnimatedTransform>[ref=1, ptr=Matrix4x4[
+        0.224951, -1e-006, 0.97437, 0;
+        0.97437, 0, -0.224951, 0;
+        8.74228e-014, 1, 1e-006, 8.87;
+        0, 0, 0, 1
+      ]],
+      mipmap = TMIPMap[
+         pixelFormat = rgb,
+         size = 1.0 MiB,
+         levels = 10,
+         cached = no,
+         filterType = ewa,
+         bc = [repeat, clamp],
+         minimum = [8.19564e-005, 0.000175357, 4.86374e-005],
+         maximum = [19.2813, 10.7656, 8.82031],
+         average = [0.39696, 0.316207, 0.278359]
+      ],
+      medium = ref<Medium>[null]
+    ]
+  \},
+  media = \{
+  \},
+  sensors = \{
+    PerspectiveCamera[
+      xfov = 37.8664,
+      nearClip = 0.01,
+      farClip = 10000,
+      worldTransform = ref<AnimatedTransform>[ref=1, ptr=Matrix4x4[
+        -0.685884, -0.317366, -0.654861, 3.69558;
+        -0.727631, 0.312466, 0.610671, -3.46243;
+        0.0108156, 0.895346, -0.44524, 3.25463;
+        0, 0, 0, 1
+      ]],
+      sampler = LowDiscrepancySampler[
+        sampleCount = 64,
+        dimension = 4
+      ],
+      film = LDRFilm[
+        size = [683, 512],
+        fileFormat = 0,
+        pixelFormat = rgb,
+        gamma = -1,
+        cropOffset = [0, 0],
+        cropSize = [683, 512],
+        banner = 0,
+        method = gamma,
+        exposure = 0,
+        reinhardKey = 0.18,
+        reinhardBurn = 0,
+        filter = GaussianFilter[stddev=0.500000, radius=2.000000]
+      ],
+      medium = ref<Medium>[null],
+      shutterOpen = 0,
+      shutterOpenTime = 0
+    ]
+  \},
+  ssIntegrators = \{
+  \},
+  objects = \{
+    SmoothDiffuse[
+      id = "\_\_diffmat",
+      reflectance = [0.18, 0.18, 0.18]
+    ],
+    Checkerboard[
+        color1 = [0.2, 0.2, 0.2],
+        color0 = [0.4, 0.4, 0.4]
+    ],
+    SmoothDiffuse[
+      id = "\_\_planemat",
+      reflectance = Checkerboard[
+          color1 = [0.2, 0.2, 0.2],
+          color0 = [0.4, 0.4, 0.4]
+      ]
+    ]
+  \}
+]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Create a render job and insert it into the queue}
+         \PY{n}{job} \PY{o}{=} \PY{n}{RenderJob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{myRenderJob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mat\PYZus{}scene}\PY{p}{,} \PY{n}{queue}\PY{p}{)}
+         \PY{n}{job}\PY{o}{.}\PY{n}{start}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Wait for all jobs to finish and release resources}
+         \PY{n}{queue}\PY{o}{.}\PY{n}{waitLeft}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{queue}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Perform the animation run}
+        \PY{n}{mat\PYZus{}sensor} \PY{o}{=} \PY{n}{mat\PYZus{}scene}\PY{o}{.}\PY{n}{getSensor}\PY{p}{(}\PY{p}{)}
+        \PY{n}{mat\PYZus{}sensor}\PY{o}{.}\PY{n}{setShutterOpen}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{mat\PYZus{}sensor}\PY{o}{.}\PY{n}{setShutterOpenTime}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{stepSize} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{360} \PY{o}{/} \PY{n}{stepSize}\PY{p}{)}\PY{p}{:}
+            \PY{n}{rotationCur} \PY{o}{=} \PY{n}{Transform}\PY{o}{.}\PY{n}{rotate}\PY{p}{(}\PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{i}\PY{o}{*}\PY{n}{stepSize}\PY{p}{)}
+            \PY{n}{rotationNext} \PY{o}{=} \PY{n}{Transform}\PY{o}{.}\PY{n}{rotate}\PY{p}{(}\PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{stepSize}\PY{p}{)}
+            \PY{n}{trafoCur} \PY{o}{=} \PY{n}{Transform}\PY{o}{.}\PY{n}{lookAt}\PY{p}{(}\PY{n}{rotationCur} \PY{o}{*} \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}
+                \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{rotationCur} \PY{o}{*} \PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+            \PY{n}{trafoNext} \PY{o}{=} \PY{n}{Transform}\PY{o}{.}\PY{n}{lookAt}\PY{p}{(}\PY{n}{rotationNext} \PY{o}{*} \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}
+                \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{rotationNext} \PY{o}{*} \PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+            \PY{n}{atrafo} \PY{o}{=} \PY{n}{AnimatedTransform}\PY{p}{(}\PY{p}{)}
+            \PY{n}{atrafo}\PY{o}{.}\PY{n}{appendTransform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{trafoCur}\PY{p}{)}
+            \PY{n}{atrafo}\PY{o}{.}\PY{n}{appendTransform}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{trafoNext}\PY{p}{)}
+            \PY{n}{atrafo}\PY{o}{.}\PY{n}{sortAndSimplify}\PY{p}{(}\PY{p}{)}
+            \PY{n}{mat\PYZus{}sensor}\PY{o}{.}\PY{n}{setWorldTransform}\PY{p}{(}\PY{n}{atrafo}\PY{p}{)}
+            \PY{n}{mat\PYZus{}scene}\PY{o}{.}\PY{n}{setDestinationFile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./MitsubaScenes/frame\PYZus{}}\PY{l+s+si}{\PYZpc{}03i}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{i}\PY{p}{)}
+            \PY{n}{job} \PY{o}{=} \PY{n}{RenderJob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{job\PYZus{}}\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{i}\PY{p}{,} \PY{n}{mat\PYZus{}scene}\PY{p}{,} \PY{n}{queue}\PY{p}{)}
+            \PY{n}{job}\PY{o}{.}\PY{n}{start}\PY{p}{(}\PY{p}{)}
+            \PY{n}{queue}\PY{o}{.}\PY{n}{waitLeft}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Release resources}
+        \PY{n}{queue}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \section{Creating a Scene}\label{creating-a-scene}
+
+The first example from the Mitsuba manual on scene construction shows
+how to build a sensor with a film.
+
+First a generic plugin manager is created and then a plugin instance of
+specific type is assigned, in this case a perspective camera with HD
+film.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k+kn}{from} \PY{n+nn}{mitsuba.render} \PY{k+kn}{import} \PY{n}{Scene}
+         \PY{n}{pmgr} \PY{o}{=} \PY{n}{PluginManager}\PY{o}{.}\PY{n}{getInstance}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Get generic plugin manager instance}
+         \PY{c+c1}{\PYZsh{} Encodes parameters on how to instantiate the \PYZsq{}perspective\PYZsq{} plugin}
+         \PY{n}{sensorProps} \PY{o}{=} \PY{n}{Properties}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perspective}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sensorProps}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{toWorld}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{Transform}\PY{o}{.}\PY{n}{lookAt}\PY{p}{(}
+             \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} Camera origin}
+             \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} Camera target}
+             \PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} \PYZsq{}up\PYZsq{} vector}
+             \PY{p}{)}
+         \PY{n}{sensorProps}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{45.0}
+         \PY{c+c1}{\PYZsh{} Encodes parameters on how to instantiate the \PYZsq{}ldrfilm\PYZsq{} plugin}
+         \PY{n}{filmProps} \PY{o}{=} \PY{n}{Properties}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ldrfilm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{filmProps}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1920}
+         \PY{n}{filmProps}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1080}
+         \PY{c+c1}{\PYZsh{} Load and instantiate the plugins}
+         \PY{n}{sensor} \PY{o}{=} \PY{n}{pmgr}\PY{o}{.}\PY{n}{createObject}\PY{p}{(}\PY{n}{sensorProps}\PY{p}{)}
+         \PY{n}{film} \PY{o}{=} \PY{n}{pmgr}\PY{o}{.}\PY{n}{createObject}\PY{p}{(}\PY{n}{filmProps}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} First configure the film and then add it to the sensor}
+         \PY{n}{film}\PY{o}{.}\PY{n}{configure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sensor}\PY{o}{.}\PY{n}{addChild}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{film}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{film}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Now, the sensor can be configured}
+         \PY{n}{sensor}\PY{o}{.}\PY{n}{configure}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Print the sensor}
+         \PY{n}{sensor}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} PerspectiveCamera[
+           xfov = 45,
+           nearClip = 0.01,
+           farClip = 10000,
+           worldTransform = ref<AnimatedTransform>[ref=1, ptr=Matrix4x4[
+             1, 0, 0, 0;
+             0, 1, 0, 0;
+             0, 0, 1, -10;
+             0, 0, 0, 1
+           ]],
+           sampler = IndependentSampler[
+             sampleCount = 4
+           ],
+           film = LDRFilm[
+             size = [1920, 1080],
+             fileFormat = 0,
+             pixelFormat = rgb,
+             gamma = -1,
+             cropOffset = [0, 0],
+             cropSize = [1920, 1080],
+             banner = 1,
+             method = gamma,
+             exposure = 0,
+             reinhardKey = 0.18,
+             reinhardBurn = 0,
+             filter = GaussianFilter[stddev=0.500000, radius=2.000000]
+           ],
+           medium = ref<Medium>[null],
+           shutterOpen = 0,
+           shutterOpenTime = 0
+         ]
+\end{Verbatim}
+        
+    \subsection{Creating a Scene using
+Dictionaries}\label{creating-a-scene-using-dictionaries}
+
+The following cell shows how to do the same sensor/film creation using
+dictionaries instead. This sensor/film has the same properties as that
+created in the previous cell.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{pmgr} \PY{o}{=} \PY{n}{PluginManager}\PY{o}{.}\PY{n}{getInstance}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sensor} \PY{o}{=} \PY{n}{pmgr}\PY{o}{.}\PY{n}{create}\PY{p}{(}\PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perspective}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{toWorld}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{Transform}\PY{o}{.}\PY{n}{lookAt}\PY{p}{(}
+                 \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{p}{)}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{film}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{\PYZob{}}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ldrfilm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+m+mi}{1920}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+m+mi}{1080}
+             \PY{p}{\PYZcb{}}
+         \PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Now, the sensor can be configured}
+         \PY{n}{sensor}\PY{o}{.}\PY{n}{configure}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} Print out the sensor plugin instance}
+         \PY{c+c1}{\PYZsh{} Note how there are considerably more properties that has been given default values}
+         \PY{n}{sensor}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} PerspectiveCamera[
+           xfov = 41.323,
+           nearClip = 0.01,
+           farClip = 10000,
+           worldTransform = ref<AnimatedTransform>[ref=1, ptr=Matrix4x4[
+             1, 0, 0, 0;
+             0, 1, 0, 0;
+             0, 0, 1, -10;
+             0, 0, 0, 1
+           ]],
+           sampler = IndependentSampler[
+             sampleCount = 4
+           ],
+           film = LDRFilm[
+             size = [1920, 1080],
+             fileFormat = 0,
+             pixelFormat = rgb,
+             gamma = -1,
+             cropOffset = [0, 0],
+             cropSize = [1920, 1080],
+             banner = 1,
+             method = gamma,
+             exposure = 0,
+             reinhardKey = 0.18,
+             reinhardBurn = 0,
+             filter = GaussianFilter[stddev=0.500000, radius=2.000000]
+           ],
+           medium = ref<Medium>[null],
+           shutterOpen = 0,
+           shutterOpenTime = 0
+         ]
+\end{Verbatim}
+        
+    \subsection{Full Scene Creation}\label{full-scene-creation}
+
+The previous examples only provided snippets of a scene. The following
+is a full scene creation example from the Mitsuba manual.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{full\PYZus{}scene} \PY{o}{=} \PY{n}{Scene}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Create a sensor, film \PYZam{} sample generator}
+         \PY{n}{full\PYZus{}scene}\PY{o}{.}\PY{n}{addChild}\PY{p}{(}\PY{n}{pmgr}\PY{o}{.}\PY{n}{create}\PY{p}{(}\PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perspective}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{toWorld}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{Transform}\PY{o}{.}\PY{n}{lookAt}\PY{p}{(}
+                 \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{Vector}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{p}{)}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{film}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{\PYZob{}}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ldrfilm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+m+mi}{1920}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+m+mi}{1080}
+             \PY{p}{\PYZcb{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sampler}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{\PYZob{}}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ldsampler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sampleCount}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+m+mi}{2}
+             \PY{p}{\PYZcb{}}
+         \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Set the integrator}
+         \PY{n}{full\PYZus{}scene}\PY{o}{.}\PY{n}{addChild}\PY{p}{(}\PY{n}{pmgr}\PY{o}{.}\PY{n}{create}\PY{p}{(}\PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{path}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Add a light source}
+         \PY{n}{full\PYZus{}scene}\PY{o}{.}\PY{n}{addChild}\PY{p}{(}\PY{n}{pmgr}\PY{o}{.}\PY{n}{create}\PY{p}{(}\PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{point}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{intensity}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{Spectrum}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Add a shape}
+         \PY{n}{full\PYZus{}scene}\PY{o}{.}\PY{n}{addChild}\PY{p}{(}\PY{n}{pmgr}\PY{o}{.}\PY{n}{create}\PY{p}{(}\PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sphere}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{Point}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{radius}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+m+mf}{1.0}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bsdf}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{\PYZob{}}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{diffuse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reflectance}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{Spectrum}\PY{p}{(}\PY{l+m+mf}{0.4}\PY{p}{)}
+             \PY{p}{\PYZcb{}}
+         \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{full\PYZus{}scene}\PY{o}{.}\PY{n}{setDestinationFile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ball}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Set the name of the render output file}
+         \PY{c+c1}{\PYZsh{} By default, the output file will be a .png}
+         \PY{n}{full\PYZus{}scene}\PY{o}{.}\PY{n}{configure}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Render the full scene just created using the existing job queus}
+         \PY{n}{job} \PY{o}{=} \PY{n}{RenderJob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{myRenderJob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{full\PYZus{}scene}\PY{p}{,} \PY{n}{queue}\PY{p}{)}
+         \PY{n}{job}\PY{o}{.}\PY{n}{start}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Wait for all jobs to finish and release resources}
+         \PY{n}{queue}\PY{o}{.}\PY{n}{waitLeft}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{queue}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Print some statistics about the rendering process}
+         \PY{k}{print}\PY{p}{(}\PY{n}{Statistics}\PY{o}{.}\PY{n}{getInstance}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{getStats}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+------------------------------------------------------------
+ * Loaded plugins :
+    -  plugins\textbackslash{}checkerboard.dll [Checkerboard texture]
+    -  plugins\textbackslash{}diffuse.dll [Smooth diffuse BRDF]
+    -  plugins\textbackslash{}envmap.dll [Environment map]
+    -  plugins\textbackslash{}field.dll [Field extraction integrator]
+    -  plugins\textbackslash{}gaussian.dll [Gaussian reconstruction filter]
+    -  plugins\textbackslash{}halton.dll [Halton QMC sampler]
+    -  plugins\textbackslash{}hdrfilm.dll [High dynamic range film]
+    -  plugins\textbackslash{}independent.dll [Independent sampler]
+    -  plugins\textbackslash{}lanczos.dll [Lanczos Sinc filter]
+    -  plugins\textbackslash{}ldrfilm.dll [Low dynamic range film]
+    -  plugins\textbackslash{}ldsampler.dll [Low discrepancy sampler]
+    -  plugins\textbackslash{}multichannel.dll [Multi-channel integrator]
+    -  plugins\textbackslash{}path.dll [MI path tracer]
+    -  plugins\textbackslash{}perspective.dll [Perspective camera]
+    -  plugins\textbackslash{}plastic.dll [Smooth plastic BRDF]
+    -  plugins\textbackslash{}point.dll [Point emitter]
+    -  plugins\textbackslash{}rectangle.dll [Rectangle intersection primitive]
+    -  plugins\textbackslash{}serialized.dll [Serialized mesh loader]
+    -  plugins\textbackslash{}sky.dll [Skylight emitter]
+    -  plugins\textbackslash{}sphere.dll [Sphere intersection primitive]
+    -  plugins\textbackslash{}sunsky.dll [Sun \& sky emitter]
+
+  * General :
+    -  Normal rays traced : 94.495 M
+    -  Shadow rays traced : 42.069 M
+
+  * Path tracer :
+    -  Average path length : 1.28 (65.94 M / 51.69 M)
+
+  * Texture system :
+    -  Cumulative MIP map memory allocations : 3.001 MiB
+    -  Filtered texture lookups : 17.12 \% (19.37 M of 113.14 M)
+    -  Lookups with clamped anisotropy : 0.00 \% (0.00 of 19.37 M)
+------------------------------------------------------------
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Show the result}
+         \PY{n}{ball\PYZus{}img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ball.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mf}{5.625}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{ball\PYZus{}img}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} <matplotlib.image.AxesImage at 0x1f4817b8>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{01a-Mitsuba-Introduction_files/01a-Mitsuba-Introduction_31_1.pdf}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k+kn}{import} \PY{n+nn}{datetime}
+         \PY{n}{now} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Completed Run at }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{now}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} After executing this cell, save the notebook before running the }
+         \PY{c+c1}{\PYZsh{} publish cells below}
+         \PY{c+c1}{\PYZsh{} To run the complete notebook, select this cell}
+         \PY{c+c1}{\PYZsh{} and then choose Cell\PYZhy{}\PYZgt{}Run All Above from the menu}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Completed Run at  2017-03-22 14:13:16.257000
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{javascript}
+         var kernel = IPython.notebook.kernel;
+         var thename = window.document.getElementById(\PYZdq{}notebook\PYZus{}name\PYZdq{}).innerHTML;
+         var command = \PYZdq{}theNotebook = \PYZdq{} + \PYZdq{}\PYZsq{}\PYZdq{}+thename+\PYZdq{}\PYZsq{}\PYZdq{};
+         kernel.execute(command);
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{result\PYZus{}folder} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./MitsubaScenes}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{} Run this cell to publish, but save the notebook beforehand}
+        \PY{c+c1}{\PYZsh{} The contents of this cell strictly for publishing the notebook.}
+        \PY{k}{if} \PY{n}{publish}\PY{p}{:}
+            \PY{n}{notebook\PYZus{}name} \PY{o}{=} \PY{n}{theNotebook} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.ipynb}\PY{l+s+s1}{\PYZsq{}}
+            \PY{c+c1}{\PYZsh{} Run nbconvert to create a tex file as well as pdf graphic files}
+            \PY{o}{!}jupyter nbconvert \PYZhy{}\PYZhy{}to latex \PY{n+nv}{\PYZdl{}notebook\PYZus{}name}
+            \PY{c+c1}{\PYZsh{} Do touchups    }
+            \PY{k}{def} \PY{n+nf}{touchup\PYZus{}build\PYZus{}tex}\PY{p}{(}\PY{n}{tex\PYZus{}file}\PY{p}{,} \PY{n}{touchups}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} Read the LaTeX file}
+                \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{tex\PYZus{}file}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{filedata} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+                \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Perform touchups}
+                \PY{k}{for} \PY{n}{src}\PY{p}{,} \PY{n}{target} \PY{o+ow}{in} \PY{n}{touchups}\PY{o}{.}\PY{n}{iteritems}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{filedata} \PY{o}{=} \PY{n}{filedata}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{src}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Write file again}
+                \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{tex\PYZus{}file}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{filedata}\PY{p}{)}
+                \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Build PDF using LaTeX}
+                \PY{o}{!}pdflatex \PY{n+nv}{\PYZdl{}tex\PYZus{}file} \PYZgt{} pdflatex.out
+                
+            \PY{n}{touchups} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[11pt]\PYZob{}article\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[11pt, a4paper, landscape]\PYZob{}scrartcl\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title\PYZob{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{theNotebook} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} 
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title\PYZob{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{casetitle} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} 
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{subtitle\PYZob{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{subtitle} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+            \PY{n}{touchup\PYZus{}build\PYZus{}tex}\PY{p}{(}\PY{n}{theNotebook} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.tex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{touchups}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Move the compiled pdf to the results folder}
+            \PY{k+kn}{import} \PY{n+nn}{os}
+            \PY{n}{publication} \PY{o}{=} \PY{n}{result\PYZus{}folder} \PY{o}{+} \PY{n}{os}\PY{o}{.}\PY{n}{sep} \PY{o}{+} \PY{n}{casename} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.pdf}\PY{l+s+s1}{\PYZsq{}}
+            \PY{k}{if} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{n}{publication}\PY{p}{)}\PY{p}{:}
+                \PY{n}{os}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{publication}\PY{p}{)}
+            \PY{n}{os}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{theNotebook} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{publication}\PY{p}{)}
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

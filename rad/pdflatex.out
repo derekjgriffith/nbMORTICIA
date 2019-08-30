@@ -1,0 +1,176 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit)
+entering extended mode
+(05b-libRadtran-dask-distributed.tex
+LaTeX2e <2017-04-15>
+Babel <3.12> and hyphenation patterns for 72 language(s) loaded.
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrartcl.cls"
+Document Class: scrartcl 2017/04/13 v3.23 KOMA-Script document class (article)
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrkbase.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrbase.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrlfile.sty"
+Package scrlfile, 2017/04/13 v3.23 KOMA-Script package (loading files)
+                  Copyright (C) Markus Kohm
+
+))) ("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\tocbasic.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrsize11pt.clo")
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\typearea.sty"
+
+Package typearea Warning: Bad type area settings!
+(typearea)                The detected line width is about 52%
+(typearea)                larger than the heuristically detected line width.
+(typearea)                You should e.g. decrease DIV, increase fontsize
+(typearea)                or change papersize.
+
+)) ("C:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\mathpazo.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg")
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def")))
+("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption3.sty"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\adjustbox\adjustbox.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex")))
+("C:\Program Files\MiKTeX 2.9\tex\latex\adjustbox\adjcalc.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\adjustbox\trimclip.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\collectbox\collectbox.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\adjustbox\tc-pdftex.def"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\ifoddpage\ifoddpage.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\ltxmisc\varwidth.sty"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\enumerate.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty")
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty")
+("C:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+For additional information on amsmath, use the `?' option.
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\textcomp.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1enc.def"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\upquote\upquote.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\eurosym\eurosym.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\ucs.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\uni-global.def"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\utf8x.def"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\fancyvrb\fancyvrb.sty"
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grffile.st
+y" ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty")
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty")
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"))))
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\hobsub-generic.sty"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\auxhook.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def")
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg")
+("C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty"))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def"
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\longtable.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\booktabs\booktabs.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\ulem\ulem.sty")
+(05b-libRadtran-dask-distributed.aux)
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd")
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\t1ppl.fd")
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\caption\ltcaption.sty")
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+
+Package geometry Warning: The marginal notes overrun the paper.
+     Add 25.0748pt and more to the right margin.
+
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: landscape 
+* h-part:(L,W,R)=(72.26999pt, 700.50687pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 452.9679pt, 72.26999pt)
+* \paperwidth=845.04684pt
+* \paperheight=597.50787pt
+* \textwidth=700.50687pt
+* \textheight=452.9679pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.40001pt
+* \headheight=17.0pt
+* \headsep=20.40001pt
+* \topskip=11.0pt
+* \footskip=47.6pt
+* \marginparwidth=84.50468pt
+* \marginparsep=12.8401pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\ucsencs.def")
+("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"))
+(05b-libRadtran-dask-distributed.out) (05b-libRadtran-dask-distributed.out)
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmss.fd")
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1ppl.fd")
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omlzplm.fd")
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omszplm.fd")
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omxzplm.fd")
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1zplm.fd")
+
+LaTeX Warning: No \author given.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd")
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd") [1{C:/ProgramData/MiK
+TeX/2.9/pdftex/config/pdftex.map}] [2] [3] [4] [5]
+Underfull \hbox (badness 10000) in paragraph at lines 480--481
+
+[6 <./05b-libRadtran-dask-distributed_files/05b-libRadtran-dask-distributed_11_
+0.png>] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 501--502
+
+[8 <./05b-libRadtran-dask-distributed_files/05b-libRadtran-dask-distributed_12_
+0.png>] [9] [10] (05b-libRadtran-dask-distributed.aux) )
+(see the transcript file for additional information) <C:\Users\DGriffith\AppDat
+a\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tctt1095.pk> <C:\Users\DG
+riffith\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecit1095.pk
+> <C:\Users\DGriffith\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi6
+00\ectt1095.pk> <C:\Users\DGriffith\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jk
+nappen\ec\dpi600\ecsx1440.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/
+8r.enc} <C:\Users\DGriffith\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\e
+c\dpi600\ecsx1200.pk> <C:\Users\DGriffith\AppData\Local\MiKTeX\2.9\fonts\pk\ljf
+our\jknappen\ec\dpi600\ecsx2074.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/urw
+/palatino/uplr8a.pfb>
+Output written on 05b-libRadtran-dask-distributed.pdf (10 pages, 180652 bytes).
+Transcript written on 05b-libRadtran-dask-distributed.log.

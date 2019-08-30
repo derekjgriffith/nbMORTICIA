@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<scene version="0.5.0">
+	<integrator id="integrator" type="path"/>
+	<shape type="sphere">
+		<point name="center" x="0" y="0" z="0"/>
+		<float name="radius" value="2"/>
+		<bsdf type='diffuse'>
+			<texture type="checkerboard" name="reflectance">
+				<float name="uscale" value="6"/>
+				<float name="vscale" value="1"/>
+			</texture>
+		</bsdf>
+		<transform name='toWorld'>
+			<lookat target="10 -1 10" origin="0 0 0" up="0 1 0"/>
+			<rotate y='1' angle='0'/>
+		</transform>
+	</shape>
+	
+	<emitter type="sunsky">
+		<float name="turbidity" value="3"/>
+		<integer name="year" value="2017"/>
+		<integer name="month" value="7"/>
+		<integer name="day" value="10"/>
+		<float name="hour" value="9"/>
+		<float name="minute" value="20"/>
+		<float name="second" value="0"/>
+	</emitter>
+	
+	<sensor type="perspective">
+		<float name="focusDistance" value="21.447"/>
+		<float name="fov" value="25"/>
+		<string name="fovAxis" value="x"/>
+		<transform name="toWorld">
+			<lookat target="0 0 0" origin="10 -1 10" up="0 1 0"/>
+		</transform>
+
+		<sampler type="halton">
+			<integer name="sampleCount" value="64"/>
+		</sampler>
+		<film type="ldrfilm">
+			<boolean name="banner" value="false"/>
+			<float name="exposure" value="0"/>
+			<string name="fileFormat" value="png"/>
+			<float name="gamma" value="-1"/>
+			<integer name="height" value="800"/>
+			<string name="tonemapMethod" value="gamma"/>
+			<integer name="width" value="800"/>
+			<rfilter type="gaussian"/>
+		</film>
+	</sensor>		
+</scene>
